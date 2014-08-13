@@ -1,4 +1,3 @@
-
 def getNameScore(nameString):
     
     score = 0
@@ -25,10 +24,24 @@ def scoreListOfNames(theNamesList):
         
     #multiply each name score by its rank in the list; the 0 index is rank 1
     theScores = [(i+1)*theNameScores[i] for i in range(len(theNameScores))]
-    print(theNameScores)
-    print(theScores)
-    return sum(theScores)
     
-#temporary short list of names
-theNamesList = ["Jon", "Kate", "Bob"]
-print(scoreListOfNames(theNamesList))
+    return sum(theScores)
+
+def parseNamesFile(filePath):
+    #filePath is a sting that is the path to a file e.g. names.txt
+    
+    #open the file
+    nameFile = open('names.txt', encoding = 'utf-8')
+    #read file; theNames contains 1 long string e.g. ["Jon","Jenney",..."Max"]
+    theNamesFileString = nameFile.read()
+    #parse theNames string; theNamesList contains a list e.g. ['','Jon','','Jenny',...'Max']
+    theNamesList = theNamesFileString.split('"')
+    #keep just the names (i.e. odd indices)
+    theNamesList = [theNamesList[i] for i in range(len(theNamesList)) if i%2 != 0]
+    
+    return theNamesList
+
+#main part of code
+filePath = 'names.txt'
+theTemp = parseNamesFile(filePath)
+print(theTemp)
