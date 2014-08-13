@@ -10,14 +10,25 @@ def getNameScore(nameString):
     
     return score
 
-#temporary short list of names
-theNames = ["Jon", "Kate", "Bob"]
-#sort is a method built into the list class
-theNames.sort()
-theScores = []
-
-for aName in theNames:
+def scoreListOfNames(theNamesList):
+    #theNamesList should be a list like ["Jon", "Kate", "Bob"]
     
-    theScores.append(getNameScore(aName))
-    #use the below print to check name and score
-    #print("{0} gets a score of {1}".format(aName ,getNameScore(aName)) )
+    #sort is a method built into the list class
+    theNamesList.sort()
+    theNameScores = []
+
+    for aName in theNamesList:
+    
+        theNameScores.append(getNameScore(aName))
+        #use the below print to check name and score
+        #print("{0} gets a score of {1}".format(aName ,getNameScore(aName)) )
+        
+    #multiply each name score by its rank in the list; the 0 index is rank 1
+    theScores = [(i+1)*theNameScores[i] for i in range(len(theNameScores))]
+    print(theNameScores)
+    print(theScores)
+    return sum(theScores)
+    
+#temporary short list of names
+theNamesList = ["Jon", "Kate", "Bob"]
+print(scoreListOfNames(theNamesList))
